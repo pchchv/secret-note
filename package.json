@@ -1,0 +1,18 @@
+{
+  "name": "secret-note-rest-api",
+  "version": "0.0.0",
+  "description": "HTTP service for secret one-time notes",
+  "main": "server.js",
+  "repository": "git+https://github.com/pchchv/secret-note-rest-api.git",
+  "author": "Jack <ipchchv@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "distribute": "yarn build-ts && node dist/server.js",
+    "test": "yarn jest --forceExit --runInBand",
+    "pretty": "prettier --check src",
+    "lint": "yarn pretty && eslint --max-warnings 0 --ext ts,tsx,json src"
+  },
+  "devDependencies": {
+    "@typegoose/typegoose": "^9.6.2"
+  }
+}
