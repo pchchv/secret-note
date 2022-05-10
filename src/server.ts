@@ -1,11 +1,4 @@
-import { getKey, getHashedKey, checkKey} from './processors/key'
-
-let key = getKey()
-let hashedKey = getHashedKey(key)
-console.log(`Your key: ${key}`)
-console.log(`Hash: ${hashedKey}`)
-if (checkKey(key, hashedKey)) {
-    console.log('Right key')
-} else {
-    console.log('Your key is invalid')
-}
+import 'module-alias/register'
+import 'source-map-support/register'
+import { encrypt, decrypt } from '@/processors/crypto'
+import { getHashedKey } from '@/processors/key'

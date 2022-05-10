@@ -52,6 +52,7 @@
   "packageManager": "yarn@3.1.0",
   "dependencies": {
     "hash.js": "^1.1.7",
+    "ncrypt-js": "^2.0.0",
     "tsc": "^2.0.4"
   }
 }
