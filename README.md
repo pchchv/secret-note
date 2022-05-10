@@ -1,2 +1,2 @@
-# secret-note-rest-api
+# secret-note
 HTTP service for secret one-time notes
