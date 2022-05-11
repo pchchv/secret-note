@@ -5,4 +5,4 @@ export class Message {
     text!: string
 }
 
-export const MEssageModel = getModelForClass(Message)
+export const MessageModel = getModelForClass(Message)

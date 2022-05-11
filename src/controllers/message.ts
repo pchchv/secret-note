@@ -1,4 +1,4 @@
-import { MEssageModel } from "@/models/Message";
+import { MessageModel } from "@/models/Message";
 import MessageBody from "@/validators/MessageBody";
 import { Body, Controller, Post } from "amala";
 
@@ -8,6 +8,6 @@ export default class MessageController {
     addMessage(
         @Body({ required: true }) { text }: MessageBody
     ) {
-        return MEssageModel.create({ text })
+        return MessageModel.create({ text })
     }
 }
