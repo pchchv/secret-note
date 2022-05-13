@@ -53,18 +53,19 @@
   "packageManager": "yarn@3.1.0",
   "dependencies": {
     "@hapi/boom": "^9.1.4",
+    "@koa/cors": "^3.1.0",
     "amala": "^8.0.2",
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0",
     "envalid": "^7.3.1",
     "hash.js": "^1.1.7",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.1.1",
-    "@koa/cors": "^3.1.0",
+    "lodash": "^4.17.21",
     "mongoose": "^6.3.3",
     "ncrypt-js": "^2.0.0",
-    "axios": "^0.24.0",
-    "dotenv": "^10.0.0",
-    "lodash": "^4.17.21",
     "tsc": "^2.0.4"
   }
 }
