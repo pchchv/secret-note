@@ -25,6 +25,7 @@
     "@types/lodash": "^4.14.177",
     "@types/node": "^16.11.11",
     "@types/supertest": "^2.0.11",
+    "@types/validator": "^13.7.2",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.5.0",
     "axios-mock-adapter": "^1.20.0",
@@ -51,10 +52,19 @@
   },
   "packageManager": "yarn@3.1.0",
   "dependencies": {
+    "@hapi/boom": "^9.1.4",
     "amala": "^8.0.2",
     "envalid": "^7.3.1",
     "hash.js": "^1.1.7",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^10.1.1",
+    "@koa/cors": "^3.1.0",
+    "mongoose": "^6.3.3",
     "ncrypt-js": "^2.0.0",
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0",
+    "lodash": "^4.17.21",
     "tsc": "^2.0.4"
   }
 }

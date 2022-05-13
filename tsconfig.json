@@ -1,18 +1,20 @@
 {
     "compilerOptions": {
+      "target": "esnext",
       "module": "commonjs",
-      "target": "es6",
-      "lib": ["es2015"],
       "moduleResolution": "node",
-      "sourceMap": true,
+      "strict": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
       "outDir": "dist",
+      "sourceMap": true,
+      "lib": ["es2015"],
       "baseUrl": "src",
       "paths": {
         "@/*": ["*"]
       },
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "strict": true
     },
     "include": ["src/**/*"]
   }
