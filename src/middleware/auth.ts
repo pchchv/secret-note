@@ -8,7 +8,6 @@ export default async function auth(ctx: Context, next: Next) {
     try {
         await verify(token)
     } catch (err) {
-        console.log(err)
         return ctx.throw(forbidden())
     }
     ctx.state.user = await UserModel.findOne({ token })
