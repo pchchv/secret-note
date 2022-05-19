@@ -18,8 +18,6 @@ export class User {
         if (!withExtra) {
           stripFields.push('token')
           stripFields.push('email')
-          stripFields.push('facebookId')
-          stripFields.push('telegramId')
         }
         if (!withToken) {
           stripFields.push('token')
