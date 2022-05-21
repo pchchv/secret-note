@@ -5,10 +5,10 @@ import { omit } from 'lodash'
 @modelOptions({ schemaOptions: { timestamps: true }})
 export class User {
     @prop({ index: true, lowercase: true })
-    email!: string
-    @prop({ index: true, lowercase: true })
+    email?: string
+    @prop({ required: true, index: true })
     name!: string
-    @prop({ index: true, lowercase: true })
+    @prop({ index: true, unique: true })
     token?: string
     strippedAndFilled({
         withExtra = false,
@@ -30,7 +30,7 @@ export const UserModel = getModelForClass(User)
 
 export async function findOrCreateUser(loginOptions: {
     name: string
-    email: string
+    email?: string
 }) {
     const user = await UserModel.findOneAndUpdate(
         loginOptions,
