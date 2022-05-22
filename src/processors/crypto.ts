@@ -1,11 +1,11 @@
-import { getKey, checkKey } from './key'
+import { getKey, checkKey, getHashedKey } from '@/processors/key'
 var ncrypt = require('ncrypt-js')
 
 export function encrypt(text: string): string[] {
     let key = getKey()
     let ncryptObject = new ncrypt(key)
     let encryptedText = ncryptObject.encrypt(text)
-    return [key, encryptedText]
+    return [key, encryptedText, getHashedKey(key)]
 
 }
 export function decrypt(encryptedText: string, key: string, hashedKey: string): string { 
