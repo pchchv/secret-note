@@ -1,6 +1,7 @@
 import auth from "@/middleware/auth";
 import { MessageModel } from "@/models/Message";
 import { User } from "@/models/User";
+import { encrypt } from "@/processors/crypto";
 import MessageBody from "@/validators/MessageBody";
 import { Body, Controller, CurrentUser, Flow, Get, Post } from "amala";
 
@@ -12,7 +13,9 @@ export default class MessageController {
         @Body({ required: true }) { text }: MessageBody,
         @CurrentUser() author: User
     ) {
-        return MessageModel.create({ author, text })
+        let [key, encryptedText, hashedKey] = encrypt(text)
+        MessageModel.create({ author, encryptedText, hashedKey })
+        return { key }
     }
 
     @Get('/')

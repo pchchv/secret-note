@@ -7,7 +7,10 @@ export class Message {
     author!: Ref<User>
     
     @prop({ required: true})
-    text!: string
+    encryptedText!: string
+
+    @prop({ required: true})
+    hashedKey!: string
 }
 
 export const MessageModel = getModelForClass(Message)
