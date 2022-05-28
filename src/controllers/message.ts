@@ -33,13 +33,6 @@ export default class MessageController {
         return { key }
     }
     
-    @Get('/last')
-    getLastMessage(
-        @CurrentUser() author: User
-    ) {
-        return MessageModel.find({ author }).sort({ _id: -1}).limit(1)
-    }
-
     @Delete('/:userKey/:flag')
     @Flow(checkAuthor)
     deleteMessage(
