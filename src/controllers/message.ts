@@ -15,22 +15,22 @@ import MessageBody from "@/validators/MessageBody";
 import checkAuthor from "@/middleware/checkAuthor";
 import { DocumentType } from "@typegoose/typegoose";
 import { Message, MessageModel } from "@/models/Message";
+import { postMessage } from "@/helpers/postMessage";
 
 @Controller('/message')
 @Flow(auth)
 export default class MessageController {
     @Post('/')
-    addMessage(
+    async addMessage(
         @Body({ required: true }) { text }: MessageBody,
         @CurrentUser() author: User
     ) {
         const separator = '.0.'
         let [key, encryptedText, hashedKey] = encrypt(text)
-        MessageModel.create({ author, encryptedText, hashedKey })
-        let message = this.getLastMessage(author)
-        let id = message._conditions.author._id.valueOf()
-        let userKey = key + separator + id
-        return { userKey }
+        const message = postMessage(author, encryptedText, hashedKey)
+        const id = (await message)._id.valueOf()
+        key = key + separator + id
+        return { key }
     }
     
     @Get('/')
