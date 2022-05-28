@@ -33,11 +33,6 @@ export default class MessageController {
         return { key }
     }
     
-    @Get('/')
-    getMessage(@CurrentUser() author: User) {
-        return MessageModel.find({ author })
-    }
-
     @Get('/last')
     getLastMessage(
         @CurrentUser() author: User
