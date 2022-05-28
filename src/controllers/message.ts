@@ -10,7 +10,7 @@ import {
 } from "amala";
 import auth from "@/middleware/auth";
 import { User } from "@/models/User";
-import { encrypt } from "@/processors/crypto";
+import { decrypt, encrypt } from "@/processors/crypto";
 import MessageBody from "@/validators/MessageBody";
 import checkAuthor from "@/middleware/checkAuthor";
 import { DocumentType } from "@typegoose/typegoose";
@@ -45,9 +45,16 @@ export default class MessageController {
         return MessageModel.find({ author }).sort({ _id: -1}).limit(1)
     }
 
-    @Delete('/:id/:flag')
+    @Delete('/:userKey/:flag')
     @Flow(checkAuthor)
-    deleteMessage(@State('message') message: DocumentType<Message>) {
-        return message.deleteOne()
-    }
+    deleteMessage(
+        @State('key') key: string,
+        @State('message') message: DocumentType<Message>
+        ) {
+            let result = decrypt(message.encryptedText, key, message.hashedKey)
+            if (result != 'Error! Invalid key.') {
+                message.deleteOne()
+            }
+            return { result }
+        }
 }
