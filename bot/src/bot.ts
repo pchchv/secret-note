@@ -2,6 +2,7 @@ import 'module-alias/register'
 import 'source-map-support/register'
 import env from '@/helpers/env';
 import { Update } from 'typegram';
+import { get } from '@/helpers/get';
 import { post } from '@/helpers/post';
 import { Context, Telegraf } from 'telegraf';
 
@@ -37,6 +38,13 @@ bot.command('allpost', (ctx) => {
     bot.on('text', (ctx) => {
         post(ctx.message.text, ctx.from.id, ctx, flag)
         ctx.deleteMessage(ctx.message.message_id)
+    })
+})
+
+bot.command('get', (ctx) => {
+    ctx.reply('Отправь ключ сообщения')
+    bot.on('text', (ctx) => {
+        get(ctx.message.text, ctx.from.id, ctx)
     })
 })
 
