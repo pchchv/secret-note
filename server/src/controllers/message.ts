@@ -6,24 +6,22 @@ import {
     State,
     Delete,
     Controller,
-    CurrentUser,
+    Header,
 } from "amala";
-import auth from "@/middleware/auth";
-import { User } from "@/models/User";
 import { decrypt, encrypt } from "@/processors/crypto";
 import MessageBody from "@/validators/MessageBody";
 import checkAuthor from "@/middleware/checkAuthor";
 import { DocumentType } from "@typegoose/typegoose";
-import { Message, MessageModel } from "@/models/Message";
+import { Message } from "@/models/Message";
 import { postMessage } from "@/helpers/postMessage";
+import MessageAuthor from "@/validators/MessageAuthor";
 
 @Controller('/message')
-@Flow(auth)
 export default class MessageController {
     @Post('/')
     async addMessage(
-        @Body({ required: true }) { text }: MessageBody,
-        @CurrentUser() author: User
+        @Body({required: true}) { author }: MessageAuthor,
+        @Body({ required: true }) { text }: MessageBody
     ) {
         const separator = '.0.'
         let [key, encryptedText, hashedKey] = encrypt(text)
@@ -33,7 +31,7 @@ export default class MessageController {
         return { key }
     }
     
-    @Delete('/:userKey/:flag')
+    @Delete('/:userKey/:user/:flag')
     @Flow(checkAuthor)
     deleteMessage(
         @State('key') key: string,

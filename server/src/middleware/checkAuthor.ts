@@ -7,8 +7,7 @@ export default async function checkAuthor(ctx: Context, next: Next) {
     try {
         const message = await MessageModel.findById(id)
         if (ctx.params.flag === "true") {
-            const user = ctx.state.user
-            if (message?.author?.toString() != user.id) {
+            if (message?.author?.toString() != ctx.params.user) {
                 throw 'Error'
             }
         }
