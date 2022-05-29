@@ -31,6 +31,15 @@ bot.command('post', (ctx) => {
     })
 })
 
+bot.command('allpost', (ctx) => {
+    ctx.reply('Отправь текст сообщения')
+    const flag = 'false'
+    bot.on('text', (ctx) => {
+        post(ctx.message.text, ctx.from.id, ctx, flag)
+        ctx.deleteMessage(ctx.message.message_id)
+    })
+})
+
 
 bot.launch()
 console.log('Bot launched')
