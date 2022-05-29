@@ -15,23 +15,25 @@ import { DocumentType } from "@typegoose/typegoose";
 import { Message } from "@/models/Message";
 import { postMessage } from "@/helpers/postMessage";
 import MessageAuthor from "@/validators/MessageAuthor";
+import MessageAuthFlag from "@/validators/MessageAuthFlag";
 
 @Controller('/message')
 export default class MessageController {
     @Post('/')
     async addMessage(
-        @Body({required: true}) { author }: MessageAuthor,
-        @Body({ required: true }) { text }: MessageBody
+        @Body({ required: true }) { author }: MessageAuthor,
+        @Body({ required: true }) { text }: MessageBody,
+        @Body({ required: true }) { authFlag }: MessageAuthFlag
     ) {
         const separator = '.0.'
         let [key, encryptedText, hashedKey] = encrypt(text)
-        const message = postMessage(author, encryptedText, hashedKey)
+        const message = postMessage(author, encryptedText, hashedKey, authFlag)
         const id = (await message)._id.valueOf()
         key = key + separator + id
         return { key }
     }
     
-    @Delete('/:userKey/:user/:flag')
+    @Delete('/:userKey/:user/')
     @Flow(checkAuthor)
     deleteMessage(
         @State('key') key: string,
