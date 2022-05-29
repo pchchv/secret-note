@@ -25,7 +25,7 @@ bot.help((ctx) => {
 bot.command('post', (ctx) => {
     ctx.reply('Отправь текст сообщения')
     bot.on('text', (ctx) => {
-        const key = post(ctx.message.text, ctx.from.id, ctx)
+        post(ctx.message.text, ctx.from.id, ctx)
         ctx.deleteMessage(ctx.message.message_id)
     })
 })
