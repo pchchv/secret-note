@@ -1,8 +1,9 @@
 import 'module-alias/register'
 import 'source-map-support/register'
-import { Context, Telegraf } from 'telegraf';
-import { Update } from 'typegram';
 import env from '@/helpers/env';
+import { Update } from 'typegram';
+import { post } from '@/helpers/post';
+import { Context, Telegraf } from 'telegraf';
 
 const bot: Telegraf<Context<Update>> = new Telegraf(env.TOKEN)
 
@@ -19,6 +20,14 @@ bot.help((ctx) => {
     + 'для отправки сообщения которое сможет прочесть кто-то другой\n'
     + '(по паролю)\n\n'
     + '/get для получения сообщения')
+})
+
+bot.command('post', (ctx) => {
+    ctx.reply('Отправь текст сообщения')
+    bot.on('text', (ctx) => {
+        const key = post(ctx.message.text, ctx.from.id, ctx)
+        ctx.deleteMessage(ctx.message.message_id)
+    })
 })
 
 
