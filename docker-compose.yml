@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 
 services:
   server:
@@ -6,9 +6,6 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
-    env_file: ./server/.env
-    ports:
-      - 1337:1337
     command: yarn distribute
   bot:
     container_name: bot
